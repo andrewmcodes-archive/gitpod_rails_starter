@@ -1,20 +1,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV['DB_POOL'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOST'] %>
-  port: <%= ENV['DB_PORT'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  connect_timeout: 2
+  checkout_timeout: 2
 
 development:
   <<: *default
-  database: CHANGEME_development
+  url: <%= ENV.fetch('DATABASE_URL', '') %>
+  database: gitpod_rails_starter_development
 
 test:
   <<: *default
-  database: CHANGEME_test
+  url: <%= ENV.fetch('DATABASE_URL', '') %>
+  database: gitpod_rails_starter_test
 
 production:
   <<: *default
-  database: CHANGEME_production
+  url: <%= ENV.fetch('DATABASE_URL', '') %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  database: gitpod_rails_starter_production

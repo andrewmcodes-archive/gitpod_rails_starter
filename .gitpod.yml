@@ -1,0 +1,27 @@
+image:
+  file: .gitpod.dockerfile
+ports:
+  - port: 3000
+    onOpen: open-preview
+  - port: 3035
+    onOpen: ignore
+  - port: 5432
+    onOpen: ignore
+  - port: 6379
+    onOpen: ignore
+
+tasks:
+  - command: redis-server
+  - command: bin/webpack-dev-server
+  - command: bin/setup && bin/rails s
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addComment: true
+    addBadge: true
+    addLabel: true
+    addCheck: true
