@@ -9,12 +9,13 @@ ports:
     onOpen: ignore
   - port: 6379
     onOpen: ignore
-
 tasks:
   - command: redis-server
-  - command: bin/webpack-dev-server
-  - command: bin/setup && bin/rails s
-
+  - init: cp .env-gitpod .env
+    command: >
+      gem install foreman;
+      bin/gitpod_setup &&
+      bin/gitpod_start
 github:
   prebuilds:
     master: true
