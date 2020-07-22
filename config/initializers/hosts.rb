@@ -7,4 +7,4 @@ return unless Rails.env.development? || Rails.env.test?
 # end
 
 # Allow accessing localhost on any domain.
-config.hosts = nil
+Rails.application.config.hosts = nil
